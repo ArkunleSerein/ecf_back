@@ -27,12 +27,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?user $emprunteur = null;
-
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?Emprunteur $emprunteurs = null;
+    private ?Emprunteur $emprunteur = null;
 
     #[ORM\Column]
     private ?bool $enabled = null;
@@ -126,21 +122,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getEmprunteur(): ?user
-    {
-        return $this->emprunteur;
-    }
-
-    public function setEmprunteur(user $emprunteur): static
-    {
-        $this->emprunteur = $emprunteur;
-
-        return $this;
-    }
-
     public function getEmprunteurs(): ?Emprunteur
     {
-        return $this->emprunteurs;
+        return $this->emprunteur;
     }
 
     public function setEmprunteurs(Emprunteur $emprunteurs): static
@@ -150,7 +134,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $emprunteurs->setUser($this);
         }
 
-        $this->emprunteurs = $emprunteurs;
+        $this->emprunteur = $emprunteurs;
 
         return $this;
     }
