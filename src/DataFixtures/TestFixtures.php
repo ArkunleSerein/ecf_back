@@ -42,10 +42,12 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         $this->loadEmprunts();
     }
 
-    public function loadAuteurs() : void
+
+    public function loadAuteurs(): void
     {
         // données statiques
         $datas = [
+
             [
                 'nom' => 'Auteur',
                 'prenom' => 'inconnu',
@@ -62,37 +64,42 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'nom' => 'Moitessier',
                 'prenom' => 'Thomas',
             ],
+
         ];
 
 
-        foreach($datas as $data) {
+        foreach ($datas as $data) {
             $auteur = new Auteur();
             $auteur->setNom($data['nom']);
             $auteur->setPrenom($data['prenom']);
 
             $this->manager->persist($auteur);
         }
+
         $this->manager->flush();
 
-        // données dynamiques
-        for($i = 0; $i < 500; $i++) {
-            $auteur = new Auteur();
-            $auteur->setNom($this->faker->name());
 
-            $auteur->setPrenom($this->faker->name());
+        // données dynamiques
+        for ($i = 0; $i < 500; $i++) {
+            $auteur = new Auteur();
+            $auteur->setNom($this->faker->name(1));
+
+            $auteur->setPrenom($this->faker->name(1));
 
             $this->manager->persist($auteur);
         }
+
         $this->manager->flush();
     }
 
 
-    public function loadGenres() : void
+    public function loadGenres(): void
     {
-        
+
         // données statiques
-        
+
         $datas = [
+
             [
                 'nom' => 'poésie',
                 'description' => null
@@ -145,19 +152,21 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'nom' => 'journal intime',
                 'description' => null
             ],
+
         ];
 
-        foreach($datas as $data) {
+        foreach ($datas as $data) {
             $genre = new Genre();
             $genre->setNom($data['nom']);
             $genre->setDescription($data['description']);
 
             $this->manager->persist($genre);
         }
+
         $this->manager->flush();
     }
 
-    public function loadLivres() : void
+    public function loadLivres(): void
     {
         $auteurRepository = $this->manager->getRepository(Auteur::class);
         $auteurs = $auteurRepository->findAll();
@@ -166,6 +175,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
         // données statiques
         $datas = [
+
             [
                 'titre' => 'Lorem ipsum dolor sit amet',
                 'anneeEdition' => '2010',
@@ -198,24 +208,25 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'auteur' => $auteurs[3],
                 'genres' => $genres[3]
             ],
-            
+
         ];
-        
-        foreach($datas as $data) {
+
+        foreach ($datas as $data) {
             $livre = new Livre();
             $livre->setTitre($data['titre']);
             $livre->setAnneeEdition($data['anneeEdition']);
             $livre->setNombrePage($data['nombrePages']);
             $livre->setCodeIsbn($data['codeIsbn']);
             $livre->setAuteur($data['auteur']);
-            $livre->addGenre($data['genres']);            
-            
+            $livre->addGenre($data['genres']);
+
             $this->manager->persist($livre);
         }
+
         $this->manager->flush();
-        
+
         // données dynamiques
-        for($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
             $livre = new Livre();
             $words = random_int(1, 3);
             $livre->setTitre($this->faker->sentence($words));
@@ -230,15 +241,16 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $shortListGenres = $this->faker->randomElements($genres, $genresCount);
 
             foreach ($shortListGenres as $genre) {
-                $livre->addGenre($genre); 
+                $livre->addGenre($genre);
             }
 
             $this->manager->persist($livre);
         }
+
         $this->manager->flush();
     }
 
-    public function loadEmprunts() : void
+    public function loadEmprunts(): void
     {
         $emprunteurRepository = $this->manager->getRepository(Emprunteur::class);
         $emprunteurs = $emprunteurRepository->findAll();
@@ -247,6 +259,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
         // données statiques
         $datas = [
+
             [
                 'dateEmprunt' => new DateTime('2020-02-01 10:00:00'),
                 'dateRetour' => new DateTime('2020-03-01 10:00:00'),
@@ -265,9 +278,10 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'emprunteur' => $emprunteurs[2],
                 'livre' => $livres[2]
             ],
+
         ];
 
-        foreach($datas as $data) {
+        foreach ($datas as $data) {
             $emprunt = new Emprunt();
             $emprunt->setDateEmprunt($data['dateEmprunt']);
             $emprunt->setDateRetour($data['dateRetour']);
@@ -276,31 +290,34 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
             $this->manager->persist($emprunt);
         }
+
         $this->manager->flush();
 
         // données dynamiques
-        for($i = 0; $i < 200; $i++) {
+        for ($i = 0; $i < 200; $i++) {
             $emprunt = new Emprunt();
             $dateEmprunt = $this->faker->dateTimeBetween('-12 months', '-6 months');
             $emprunt->setDateEmprunt($dateEmprunt);
             $dateRetour = $this->faker->optional(0.7)->dateTimeBetween('-5 months', '-1 months');
             $emprunt->setDateRetour($dateRetour);
-            
+
             $emprunteur = $this->faker->randomElement($emprunteurs);
             $emprunt->setEmprunteur($emprunteur);
 
             $livre = $this->faker->randomElement($livres);
             $emprunt->setLivre($livre);
-            
+
             $this->manager->persist($emprunt);
         }
+
         $this->manager->flush();
     }
 
-    public function loadUsers() : void 
+    public function loadUsers(): void
     {
         // données statiques
         $datas = [
+
             [
                 'email' => 'foo.foo@example.com',
                 'password' => '123',
@@ -328,7 +345,9 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'prenom' => 'baz',
                 'telephone' => '123456789'
             ]
+
         ];
+
         foreach ($datas as $data) {
             $user = new User();
             $user->setEmail($data['email']);
@@ -336,11 +355,11 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $user->setPassword($password);
             $user->setRoles($data['roles']);
             $user->setEnabled($data['enabled']);
-            
-        
-            $this->manager->persist($user); 
-        
-            
+
+
+            $this->manager->persist($user);
+
+
             $emprunteur = new Emprunteur();
             $emprunteur->setNom($data['nom']);
             $emprunteur->setPrenom($data['prenom']);
@@ -348,12 +367,12 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $emprunteur->setUser($user);
 
             $this->manager->persist($emprunteur);
-            
+
             $this->manager->flush();
         }
 
         // données dynamiques
-        for($i = 0; $i < 100; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $user = new User();
             $user->setEmail($this->faker->unique()->safeEmail());
             $password = $this->hasher->hashPassword($user, '123');
@@ -372,7 +391,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
             $this->manager->persist($emprunteur);
         }
+
         $this->manager->flush();
-        
     }
 }

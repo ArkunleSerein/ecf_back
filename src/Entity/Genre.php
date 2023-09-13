@@ -25,13 +25,10 @@ class Genre
     #[ORM\ManyToMany(targetEntity: livre::class)]
     private Collection $livres;
 
-    #[ORM\ManyToMany(targetEntity: Livre::class, mappedBy: 'genres')]
-    private Collection $livre;
 
     public function __construct()
     {
         $this->livres = new ArrayCollection();
-        $this->livre = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,8 +87,4 @@ class Genre
     /**
      * @return Collection<int, Livre>
      */
-    public function getLivre(): Collection
-    {
-        return $this->livre;
-    }
 }
