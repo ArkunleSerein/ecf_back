@@ -82,9 +82,9 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         // données dynamiques
         for ($i = 0; $i < 500; $i++) {
             $auteur = new Auteur();
-            $auteur->setNom($this->faker->name(1));
+            $auteur->setNom($this->faker->lastName());
 
-            $auteur->setPrenom($this->faker->name(1));
+            $auteur->setPrenom($this->faker->firstName());
 
             $this->manager->persist($auteur);
         }
@@ -384,8 +384,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $this->manager->persist($user);
 
             $emprunteur = new Emprunteur();
-            $emprunteur->setNom($this->faker->name(1));
-            $emprunteur->setPrenom($this->faker->name(1));
+            $emprunteur->setNom($this->faker->lastName());
+            $emprunteur->setPrenom($this->faker->firstName());
             $emprunteur->setTel($this->faker->unique()->randomNumber());
             $emprunteur->setUser($user);
 
