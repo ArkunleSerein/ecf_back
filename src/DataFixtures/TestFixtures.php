@@ -2,13 +2,13 @@
 
 namespace App\DataFixtures;
 
+use DateTime;
 use App\Entity\Auteur;
 use App\Entity\Emprunteur;
 use App\Entity\Genre;
 use App\Entity\Livre;
 use App\Entity\Emprunt;
 use App\Entity\User;
-use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -49,20 +49,20 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
         $datas = [
 
             [
-                'nom' => 'Auteur',
-                'prenom' => 'inconnu',
+                'nom' => 'Zola',
+                'prenom' => 'Emile',
             ],
             [
-                'nom' => 'Cartier',
-                'prenom' => 'Hugues',
+                'nom' => 'Camus',
+                'prenom' => 'Albert',
             ],
             [
-                'nom' => 'Lambert',
-                'prenom' => 'Armand',
+                'nom' => 'Flaubert',
+                'prenom' => 'gustave',
             ],
             [
-                'nom' => 'Moitessier',
-                'prenom' => 'Thomas',
+                'nom' => 'Verne',
+                'prenom' => 'Jules',
             ],
 
         ];
@@ -178,35 +178,35 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
 
             [
                 'titre' => 'Lorem ipsum dolor sit amet',
-                'anneeEdition' => '2010',
-                'nombrePages' => '100',
+                'anneeEdition' => 2010,
+                'nombrePage' => 100,
                 'codeIsbn' => '9785786930024',
                 'auteur' => $auteurs[0],
-                'genres' => $genres[0]
+                'genre' => $genres[0]
             ],
             [
                 'titre' => 'Consectetur adipiscing elit',
-                'anneeEdition' => '2011',
-                'nombrePages' => '150',
+                'anneeEdition' => 2011,
+                'nombrePage' => 150,
                 'codeIsbn' => '9783817260935',
                 'auteur' => $auteurs[1],
-                'genres' => $genres[1]
+                'genre' => $genres[1]
             ],
             [
                 'titre' => 'Mihi quidem Antiochum',
-                'anneeEdition' => '2012',
-                'nombrePages' => '200',
+                'anneeEdition' => 2012,
+                'nombrePage' => 200,
                 'codeIsbn' => '9782020493727',
                 'auteur' => $auteurs[2],
-                'genres' => $genres[2]
+                'genre' => $genres[2]
             ],
             [
                 'titre' => 'Quem audis satis belle',
-                'anneeEdition' => '2013',
-                'nombrePages' => '250',
+                'anneeEdition' => 2013,
+                'nombrePage' => 250,
                 'codeIsbn' => '9794059561353',
                 'auteur' => $auteurs[3],
-                'genres' => $genres[3]
+                'genre' => $genres[3]
             ],
 
         ];
@@ -215,10 +215,10 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $livre = new Livre();
             $livre->setTitre($data['titre']);
             $livre->setAnneeEdition($data['anneeEdition']);
-            $livre->setNombrePage($data['nombrePages']);
+            $livre->setNombrePage($data['nombrePage']);
             $livre->setCodeIsbn($data['codeIsbn']);
             $livre->setAuteur($data['auteur']);
-            $livre->addGenre($data['genres']);
+            $livre->addGenre($data['genre']);
 
             $this->manager->persist($livre);
         }
@@ -231,7 +231,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $words = random_int(1, 3);
             $livre->setTitre($this->faker->sentence($words));
             $livre->setAnneeEdition($this->faker->optional($weight = 0.6)->year());
-            $livre->setNombrePage($this->faker->randomNumber());
+            $livre->setNombrePage($this->faker->randomNumber(1, 2000));
             $livre->setCodeIsbn($this->faker->optional($weight = 0.6)->randomNumber());
 
             $auteur = $this->faker->randomElement($auteurs);

@@ -22,7 +22,7 @@ class Genre
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToMany(targetEntity: livre::class)]
+    #[ORM\ManyToMany(targetEntity: livre::class, mappedBy: "genres")]
     private Collection $livres;
 
 
@@ -83,9 +83,4 @@ class Genre
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Livre>
-     */
-
 }

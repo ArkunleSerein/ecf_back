@@ -129,19 +129,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getEmprunteurs(): ?Emprunteur
+    public function getEmprunteur(): ?Emprunteur
     {
         return $this->emprunteur;
     }
 
-    public function setEmprunteurs(Emprunteur $emprunteurs): static
+    public function setEmprunteur(Emprunteur $emprunteur): static
     {
         // set the owning side of the relation if necessary
-        if ($emprunteurs->getUser() !== $this) {
-            $emprunteurs->setUser($this);
+        if ($emprunteur->getUser() !== $this) {
+            $emprunteur->setUser($this);
         }
 
-        $this->emprunteur = $emprunteurs;
+        $this->emprunteur = $emprunteur;
 
         return $this;
     }

@@ -30,7 +30,7 @@ class Livre
     #[ORM\ManyToOne(inversedBy: 'livres')]
     private ?Auteur $auteur = null;
 
-    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'livre')]
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'livres')]
     private Collection $genres;
 
     #[ORM\OneToMany(mappedBy: 'livre', targetEntity: Emprunt::class, orphanRemoval: true)]

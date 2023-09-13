@@ -27,7 +27,7 @@ class Emprunteur
     #[ORM\OneToMany(mappedBy: 'emprunteur', targetEntity: Emprunt::class, orphanRemoval: true)]
     private Collection $emprunts;
 
-    #[ORM\OneToOne(inversedBy: 'emprunteurs', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'emprunteur', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
