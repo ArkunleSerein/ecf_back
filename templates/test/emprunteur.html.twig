@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} <h1>Test Emprunteur</h1>{% endblock %}
+
+{% block body %}
+
+<h2>Liste des emprunteurs par ordre alphabethique de nom</h2>
+{% for emprunteur in emprunteurs %} 
+<h3> {{ emprunteur.nom }} {{ emprunteur.prenom }} (id {{emprunteur.id}}) </h3>
+<p>Téléphone {{ emprunteur.tel }}</p>
+{% endfor %}
+
+<h2>- les données de l'emprunteur dont l'id est `3`</h2>
+{% for emprunteur in emprunteur3 %}
+<h3> {{ emprunteur.nom }} {{ emprunteur.prenom }} (id {{emprunteur.id}}) </h3>
+<p>Téléphone {{ emprunteur.tel }}</p>
+{% endfor %}
+
+<h2>Données de l'emprunteur qui est relié au user dont l'id est `3`</h2>
+
+<p> {{ user3.emprunteur.nom }} {{ user3.emprunteur.prenom }} </p>
+<p>Téléphone {{ user3.emprunteur.tel }}</p>
+
+
+<h2>Données de l'emprunteur dont le nom ou le prénom contient le mot clé `foo`</h2>
+{% for emprunteur in emprunteursFoo %}
+<h3> {{ emprunteur.nom }} {{ emprunteur.prenom }} (id {{emprunteur.id}}) </h3>
+<p>Téléphone {{ emprunteur.tel }}</p>
+{% endfor %}
+
+<h2>Données de l'emprunteur dont tel contient '1234'</h2>
+{% for emprunteur in emprunteursPhone %}
+<h3> {{ emprunteur.nom }} {{ emprunteur.prenom }} (id {{emprunteur.id}}) </h3>
+<p>Téléphone {{ emprunteur.tel }}</p>
+{% endfor %}
+
+<h2>Données de l'emprunteur dont la date de création est antérieure au 01/03/2021 exclu</h2>
+{% for emprunteur in emprunteursCreatedAt %}
+<h3> {{ emprunteur.nom }} {{ emprunteur.prenom }} (id {{emprunteur.id}}) </h3>
+<p>Téléphone {{ emprunteur.tel }}</p>
+<p>Date de Création {{ emprunteur.createdAt|date('d/m/Y') }}</p>
+{% endfor %}
+
+{% endblock %}

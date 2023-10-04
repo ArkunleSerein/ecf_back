@@ -325,7 +325,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'enabled' => true,
                 'nom' => 'foo',
                 'prenom' => 'foo',
-                'telephone' => '123456789'
+                'telephone' => '123456789',
+                'createdAt' => new DateTime('2020-02-01 10:00:00'),
             ],
             [
                 'email' => 'bar.bar@example.com',
@@ -334,7 +335,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'enabled' => false,
                 'nom' => 'bar',
                 'prenom' => 'bar',
-                'telephone' => '123456789'
+                'telephone' => '123456789',
+                'createdAt' => new DateTime('2021-02-01 12:00:00'),
             ],
             [
                 'email' => 'baz.baz@example.com',
@@ -343,7 +345,8 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
                 'enabled' => true,
                 'nom' => 'baz',
                 'prenom' => 'baz',
-                'telephone' => '123456789'
+                'telephone' => '123456789',
+                'createdAt' => new DateTime('2022-02-01 15:00:00'),
             ]
 
         ];
@@ -365,6 +368,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $emprunteur->setPrenom($data['prenom']);
             $emprunteur->setTel($data['telephone']);
             $emprunteur->setUser($user);
+            $emprunteur->setCreatedAt($data['createdAt']);
 
             $this->manager->persist($emprunteur);
 
@@ -388,6 +392,7 @@ class TestFixtures extends Fixture implements FixtureGroupInterface
             $emprunteur->setPrenom($this->faker->firstName());
             $emprunteur->setTel($this->faker->unique()->randomNumber());
             $emprunteur->setUser($user);
+            $emprunteur->setCreatedAt($this->faker->dateTimeBetween('-6 months', '-1 months'));
 
             $this->manager->persist($emprunteur);
         }
