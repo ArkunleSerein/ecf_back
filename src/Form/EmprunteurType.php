@@ -15,6 +15,9 @@ class EmprunteurType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('tel')
+            ->add('createdAt')
+            ->add('updatedAt')
+            ->add('deletedAt')
             ->add('user')
         ;
     }
