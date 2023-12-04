@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body %}
+<h1>Liste des emprunts en cours de : {{ emprunteur.nom}} {{ emprunteur.prenom}} </h1>
+{% for emprunt in emprunts %}
+
+    <p>id : {{ emprunt.id }}</p>
+    <p>titre : {{emprunt.livre.titre}}</p>
+    <p>auteur : {{emprunt.livre.auteur}}</p>
+    <p>date d'emprunt : {{ emprunt.dateEmprunt|date('Y-m-d H:i:s') }}</p>
+    <p>date de retour : {{ emprunt.dateRetour|date('Y-m-d H:i:s') }}</p>
+{% endfor %}
+
+{% if emprunts is empty %}
+
+    <p>Vous n'avez aucun emprunt en cours</p>
+
+{% endif %}
+
+{% endblock %}

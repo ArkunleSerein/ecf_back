@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col">
+        <h1>Livres</h1>
+
+        {% if livres %}
+        <table class="table">
+
+            <tr>
+                <th>Titre</th>
+            </tr>
+            {% for livre in livres %} 
+        <tr>
+            <td>
+                <a 
+                class="list-group-item list-group-item-action link-success "
+                href="{{ path('app_front_livre_show', { id: livre.id}) }}">
+                <h4>{{ livre.titre }}</h4>
+                </a>
+            </td>
+        </tr> 
+        {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

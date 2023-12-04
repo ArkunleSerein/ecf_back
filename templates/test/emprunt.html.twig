@@ -33,7 +33,7 @@
 {% for emprunt in empruntNotReturn %}
 <h3>(id {{emprunt.id}}) </h3>
 <p>Date d'emprunt {{ emprunt.dateEmprunt|date('Y-m-d H:i:s') }}</p>
-<p>Date de retour {{ emprunt.dateRetour }}</p>
+<p>Date de retour {{ emprunt.dateRetour|date('Y-m-d H:i:s') }}</p>
 {% endfor %}
 
 

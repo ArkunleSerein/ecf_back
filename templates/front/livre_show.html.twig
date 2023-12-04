@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+<h1>Livres</h1>
+<ul>
+    <li> Titre : {{ livre.titre }}</li>
+    <li> Année Edition : {{livre.anneeEdition}} </li>
+    <li> Nombre de liages :{{ livre.nombrePage }} </li>
+    <li> Code ISBN : {{ livre.codeIsbn }} </li>
+    <li> Auteur : {{livre.auteur}} </li>
+    {% for genre in genres %}
+    <li> Genre : {{ genre.nom }} </li>
+    {% endfor %}
+</ul>
+
+<a href="{{ path('app_home') }}">Retour</a>
+
+
+
+{% endblock %}
